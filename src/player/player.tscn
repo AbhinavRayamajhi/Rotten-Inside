@@ -43,3 +43,12 @@ collision_mask = 64
 
 [node name="HurtCollision" type="CollisionShape2D" parent="HurtBox" unique_id=1794695012]
 shape = SubResource("CapsuleShape2D_1l4rv")
+
+[node name="DashTimer" type="Timer" parent="." unique_id=883959714]
+wait_time = 0.3
+
+[node name="DashCooldown" type="Timer" parent="." unique_id=581608425]
+wait_time = 0.5
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
