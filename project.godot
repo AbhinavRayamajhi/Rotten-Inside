@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Rotten Inside"
-run/main_scene="uid://cgrmvfsh0jltj"
+run/main_scene="uid://cicvl7m1gy7wm"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Events="*uid://br730a2eggo41"
 
 [display]
 

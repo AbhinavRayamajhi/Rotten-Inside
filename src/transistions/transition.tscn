@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bcaak6q4yo4dw"]
+
+[ext_resource type="Script" uid="uid://bp4d1a038f0uo" path="res://src/transistions/transition.gd" id="1_jc1mo"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_yrenr"]
+b = Vector2(0, -192)
+
+[node name="Area2D" type="Area2D" unique_id=142645661]
+collision_mask = 2
+script = ExtResource("1_jc1mo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1069339686]
+shape = SubResource("SegmentShape2D_yrenr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
