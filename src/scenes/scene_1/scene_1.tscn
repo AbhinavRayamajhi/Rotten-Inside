@@ -27,7 +27,12 @@ tile_set = SubResource("TileSet_1l4rv")
 [node name="new_game_spawn" type="Marker2D" parent="Spawns" unique_id=126549116]
 position = Vector2(95, -192)
 
-[node name="To_Scene_2" parent="." unique_id=142645661 instance=ExtResource("3_i0n62")]
+[node name="from_scene_2" type="Marker2D" parent="Spawns" unique_id=1185818015]
+position = Vector2(2947, -732)
+
+[node name="Transitions" type="Node2D" parent="." unique_id=1848093451]
+
+[node name="to_scene_2" parent="Transitions" unique_id=142645661 instance=ExtResource("3_i0n62")]
 position = Vector2(3008, -640)
 to_scene_path = "res://src/scenes/scene_2/scene_2.tscn"
-to_scene_spawn = "From_Scene_1"
+to_scene_spawn = "from_scene_1"
