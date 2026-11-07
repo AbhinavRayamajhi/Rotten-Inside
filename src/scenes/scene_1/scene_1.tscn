@@ -15,6 +15,9 @@ tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_drpq3")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1gp5"]
+size = Vector2(3071, 1086)
+
 [node name="Scene1" type="Node2D" unique_id=536061306]
 script = ExtResource("1_i0n62")
 
@@ -36,3 +39,12 @@ position = Vector2(2947, -732)
 position = Vector2(3008, -640)
 to_scene_path = "res://src/scenes/scene_2/scene_2.tscn"
 to_scene_spawn = "from_scene_1"
+
+[node name="CameraLimits" type="Area2D" parent="." unique_id=422083941]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraLimits" unique_id=193089254]
+position = Vector2(1472.5, -480)
+shape = SubResource("RectangleShape2D_t1gp5")

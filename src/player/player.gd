@@ -4,15 +4,17 @@ enum State {
 	IDLE,
 	WALK, 
 	JUMP,
+	DOUBLE_JUMP,
 	FALL,
 	DASH, 
 	WALL_SLIDE 
 }
 
-enum Gravity{
+enum Gravity {
 	REGULAR,
 	ON_WALL
 }
+
 
 const SPEED : float = 450.0
 const DECELERATION : float = 2000.0
@@ -46,6 +48,8 @@ func _physics_process(delta : float) -> void:
 			walk_state(delta)
 		State.JUMP:
 			jump_state(delta)
+		State.DOUBLE_JUMP:
+			double_jump_state(delta)
 		State.FALL:
 			fall_state(delta)
 		State.DASH:
@@ -63,15 +67,17 @@ func check_dash_cooldown(delta : float) -> void:
 		if dash_cooldown_timer <= 0:
 			is_dash_available = true
 
+
 func apply_gravity(delta : float, is_regular : Gravity) -> void:
-	# Increase gravity multi if player falling and less gravity if not regular(wall slide,etc)
+	# Increase gravity multiplier if player falling and less gravity if not regular(wall slide,etc)
 	current_gravity_mult = FALLING_GRAVITY_MULT if velocity.y > 0 else GRAVITY_MULT
 	if is_regular == Gravity.ON_WALL: 
 		current_gravity_mult /= 2
 	# Add the gravity and limit it to terminal velocity
 	velocity.y += get_gravity().y * current_gravity_mult * delta
 	velocity.y = min(velocity.y, TERMINAL_VELOCITY)
-	
+
+
 func handle_movement_inputs() -> void:
 	var input_direction := Input.get_axis("left", "right")
 	# Handle jump and double jump
@@ -80,14 +86,15 @@ func handle_movement_inputs() -> void:
 			change_state(State.JUMP)
 		elif is_double_jump_available:
 			is_double_jump_available = false;
-			change_state(State.JUMP)
+			change_state(State.DOUBLE_JUMP)	
 	# Handle dash
 	elif Input.is_action_just_pressed("dash") and is_dash_available:
 		change_state(State.DASH)
 	# Handle walking
-	elif input_direction and is_on_floor():
+	elif is_on_floor() and input_direction:
 		change_state(State.WALK)
-		
+
+
 func handle_horizontal_movement(delta : float) -> void:
 	var input_direction := Input.get_axis("left", "right")
 	if input_direction:
@@ -95,6 +102,7 @@ func handle_horizontal_movement(delta : float) -> void:
 		velocity.x = input_direction * SPEED 
 	else:
 		velocity.x = move_toward(velocity.x, 0, DECELERATION * delta)
+
 
 # State handles
 func change_state(new_state : State) -> void:
@@ -104,17 +112,21 @@ func change_state(new_state : State) -> void:
 	match new_state:
 		State.JUMP:
 			velocity.y = JUMP_VELOCITY
+		State.DOUBLE_JUMP:
+			velocity.y = JUMP_VELOCITY
 		State.DASH:
 			dash_timer = DASH_DURATION
 			
 	current_state = new_state
+
 
 func idle_state(delta : float) -> void:
 	velocity.x = move_toward(velocity.x, 0, SPEED)
 	handle_movement_inputs()
 	# Gravity
 	apply_gravity(delta, Gravity.REGULAR)
-	
+
+
 func walk_state(delta : float) -> void:
 	handle_movement_inputs()
 	handle_horizontal_movement(delta)
@@ -123,13 +135,23 @@ func walk_state(delta : float) -> void:
 	if not Input.get_axis("left", "right"):
 		change_state(State.IDLE)
 
+
 func jump_state(delta : float) -> void:
 	handle_movement_inputs()
 	handle_horizontal_movement(delta)
 	apply_gravity(delta, Gravity.REGULAR)
 	if velocity.y >= 0:
 		change_state(State.FALL)
-		
+
+
+func double_jump_state(delta : float) -> void:
+	handle_movement_inputs()
+	handle_horizontal_movement(delta)
+	apply_gravity(delta, Gravity.REGULAR)
+	if velocity.y >= 0:
+		change_state(State.FALL)
+
+
 func fall_state(delta : float) -> void:
 	handle_movement_inputs()
 	handle_horizontal_movement(delta)
@@ -140,18 +162,21 @@ func fall_state(delta : float) -> void:
 			change_state(State.WALK)
 		else:
 			change_state(State.IDLE)
-	
+
+
 func dash_state(delta : float) -> void:
 	# Keep dash velocity throughout the dash and stop falling
 	velocity.x = facing_direction * DASH_SPEED
 	velocity.y = 0
 	dash_timer -= delta
-
+	
 	if dash_timer <= 0:
 		dash_cooldown_timer = DASH_COOLDOWN
 		is_dash_available = false
 		velocity.x = clamp(velocity.x, -SPEED, SPEED)
-		if Input.get_axis("left", "right"):
+		if not is_on_floor():
+			change_state(State.FALL)
+		elif Input.get_axis("left", "right"):
 			change_state(State.WALK)
 		else:
 			change_state(State.IDLE)
