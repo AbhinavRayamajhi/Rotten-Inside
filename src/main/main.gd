@@ -30,9 +30,9 @@ func load_room(path : String, spawn : String):
 		
 	var area = current_room.get_node("CameraLimits") as Area2D
 	var collision_shape = area.get_node("CollisionShape2D")
-	# Collision shape needs to be transformed from its local cordinates to the global cordinates
+	# Collision shape needs to be transformed from its local coordinates to the global cordinates
 	# for proper camera limits
 	current_camera_limits = collision_shape.global_transform * collision_shape.shape.get_rect()
-	camera.set_target(player)
 	camera.change(current_camera_limits)
+	camera.set_target(player)
 	

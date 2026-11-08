@@ -10,5 +10,5 @@ script = ExtResource("1_3s6yk")
 [node name="Player" parent="." unique_id=13239550 instance=ExtResource("2_ab7mr")]
 
 [node name="Camera" type="Camera2D" parent="." unique_id=1633443964]
-zoom = Vector2(0.6, 0.6)
+zoom = Vector2(0.8, 0.8)
 script = ExtResource("3_ab7mr")

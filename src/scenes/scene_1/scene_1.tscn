@@ -31,7 +31,7 @@ tile_set = SubResource("TileSet_1l4rv")
 position = Vector2(95, -192)
 
 [node name="from_scene_2" type="Marker2D" parent="Spawns" unique_id=1185818015]
-position = Vector2(2947, -732)
+position = Vector2(2945, -640)
 
 [node name="Transitions" type="Node2D" parent="." unique_id=1848093451]
 

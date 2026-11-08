@@ -26,7 +26,7 @@ tile_set = SubResource("TileSet_gmfj6")
 [node name="Spawns" type="Node2D" parent="." unique_id=399233229]
 
 [node name="from_scene_1" type="Marker2D" parent="Spawns" unique_id=1789676684]
-position = Vector2(-254, -735)
+position = Vector2(-256, -639)
 
 [node name="Transitions" type="Node2D" parent="." unique_id=350575119]
 
