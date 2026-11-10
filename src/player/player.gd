@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
+
 enum State { 
 	IDLE,
 	WALK, 
@@ -102,6 +106,10 @@ func handle_horizontal_movement(delta : float) -> void:
 		velocity.x = input_direction * SPEED 
 	else:
 		velocity.x = move_toward(velocity.x, 0, DECELERATION * delta)
+	if facing_direction < 0:
+		animated_sprite_2d.flip_h = true
+	else:
+		animated_sprite_2d.flip_h = false
 
 
 # State handles
@@ -125,6 +133,7 @@ func idle_state(delta : float) -> void:
 	handle_movement_inputs()
 	# Gravity
 	apply_gravity(delta, Gravity.REGULAR)
+	animated_sprite_2d.play("idle")
 
 
 func walk_state(delta : float) -> void:

@@ -1,25 +1,35 @@
 [gd_scene format=3 uid="uid://d2c0r487oyvo6"]
 
-[ext_resource type="Texture2D" uid="uid://dn3n0ltwhyaye" path="res://src/player/player.png" id="1_4anbu"]
 [ext_resource type="Script" uid="uid://d0ho82linr41d" path="res://src/player/player.gd" id="1_rxibo"]
+[ext_resource type="Texture2D" uid="uid://05s0hpn6l1mq" path="res://src/player/idle.png" id="2_rxibo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxibo"]
+atlas = ExtResource("2_rxibo")
+region = Rect2(0, 0, 80, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf2ua"]
+atlas = ExtResource("2_rxibo")
+region = Rect2(80, 0, 80, 140)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t1gp5"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_4anbu")
+"texture": SubResource("AtlasTexture_rxibo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf2ua")
 }],
 "loop": 1,
-"name": &"new_animation",
-"speed": 5.0
+"name": &"idle",
+"speed": 3.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t1gp5"]
-radius = 32.0
-height = 128.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ab7mr"]
+size = Vector2(54, 128)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1l4rv"]
-radius = 28.0
+radius = 17.0
 height = 124.0
 
 [node name="Player" type="CharacterBody2D" unique_id=13239550]
@@ -27,12 +37,14 @@ collision_layer = 2
 script = ExtResource("1_rxibo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1623272608]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_t1gp5")
-animation = &"new_animation"
-autoplay = "new_animation"
+animation = &"idle"
+frame_progress = 0.58871627
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=1696313281]
-shape = SubResource("CapsuleShape2D_t1gp5")
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_ab7mr")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1501865607]
 collision_layer = 4

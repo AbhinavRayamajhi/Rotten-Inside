@@ -9,7 +9,7 @@ var camera_speed : float = 5.0
 var facing_direction : float = 1.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta : float) -> void:
+func _physics_process(delta : float) -> void:
 	if not target:
 		return
 	
