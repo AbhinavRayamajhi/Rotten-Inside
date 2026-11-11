@@ -33,6 +33,6 @@ func load_room(path : String, spawn : String):
 	# Collision shape needs to be transformed from its local coordinates to the global cordinates
 	# for proper camera limits
 	current_camera_limits = collision_shape.global_transform * collision_shape.shape.get_rect()
-	camera.change(current_camera_limits)
+	camera.set_limits(current_camera_limits)
 	camera.set_target(player)
 	

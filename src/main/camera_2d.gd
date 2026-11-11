@@ -21,7 +21,7 @@ func set_target(new_target : Node2D) -> void:
 	teleport()
 
 
-func change(limits : Rect2) -> void:
+func set_limits(limits : Rect2) -> void:
 	self.limit_left = int(limits.position.x)
 	self.limit_right = int(limits.end.x)
 	self.limit_top = int(limits.position.y)
@@ -29,7 +29,7 @@ func change(limits : Rect2) -> void:
 
 
 func smoothing(delta : float) -> void:
-	global_position = global_position.lerp(target.global_position, camera_speed * delta)
+	global_position = global_position.lerp(target.global_position, camera_speed * delta).round()
 
 
 func teleport() -> void:
