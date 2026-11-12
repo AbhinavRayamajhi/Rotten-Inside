@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 
 const SPEED : float = 450.0
-const DECELERATION : float = 2000.0
+const DECELERATION : float = 3000.0
 const JUMP_VELOCITY : float = -850.0
 const DASH_SPEED : float = 1400.0
 const DASH_DURATION : float = 0.3

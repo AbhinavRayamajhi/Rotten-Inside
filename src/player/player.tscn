@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://d0ho82linr41d" path="res://src/player/scripts/player.gd" id="1_rxibo"]
 [ext_resource type="Texture2D" uid="uid://05s0hpn6l1mq" path="res://src/player/idle.png" id="2_rxibo"]
-[ext_resource type="Script" uid="uid://ck6iwgh0yuky2" path="res://src/player/state_manager.gd" id="3_l271a"]
+[ext_resource type="Script" uid="uid://ckj3r2gwm0laf" path="res://src/player/scripts/player_state_manager.gd" id="3_l271a"]
 [ext_resource type="Script" uid="uid://bq1b0cas0fnig" path="res://src/player/scripts/melee_idle.gd" id="3_mf2ua"]
 [ext_resource type="Script" uid="uid://m0xerrg30d8w" path="res://src/player/scripts/melee_walk.gd" id="4_5f2sf"]
 [ext_resource type="Script" uid="uid://cvqi7hdj8fm3e" path="res://src/player/scripts/melee_jump.gd" id="4_244u8"]
-[ext_resource type="Script" uid="uid://1xb4hy2vd2m5" path="res://src/player/melee_double_jump.gd" id="6_jiejy"]
-[ext_resource type="Script" uid="uid://bx3lke8mmoc48" path="res://src/player/melee_fall.gd" id="7_x42xx"]
-[ext_resource type="Script" uid="uid://dovnihx4ce3f7" path="res://src/player/melee_dash.gd" id="8_l271a"]
+[ext_resource type="Script" uid="uid://1xb4hy2vd2m5" path="res://src/player/scripts/melee_double_jump.gd" id="6_jiejy"]
+[ext_resource type="Script" uid="uid://bx3lke8mmoc48" path="res://src/player/scripts/melee_fall.gd" id="7_x42xx"]
+[ext_resource type="Script" uid="uid://dovnihx4ce3f7" path="res://src/player/scripts/melee_dash.gd" id="8_l271a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rxibo"]
 atlas = ExtResource("2_rxibo")
@@ -47,6 +47,7 @@ script = ExtResource("1_rxibo")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_t1gp5")
 animation = &"idle"
+autoplay = "idle"
 frame_progress = 0.58871627
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=1696313281]
@@ -60,9 +61,10 @@ collision_mask = 64
 [node name="HurtCollision" type="CollisionShape2D" parent="HurtBox" unique_id=1794695012]
 shape = SubResource("CapsuleShape2D_1l4rv")
 
-[node name="StateManager" type="Node2D" parent="." unique_id=485902277 node_paths=PackedStringArray("entity")]
+[node name="StateManager" type="Node2D" parent="." unique_id=485902277 node_paths=PackedStringArray("entity", "current_state")]
 script = ExtResource("3_l271a")
 entity = NodePath("..")
+current_state = NodePath("MeleeIdle")
 
 [node name="MeleeIdle" type="Node2D" parent="StateManager" unique_id=937463723 node_paths=PackedStringArray("entity")]
 script = ExtResource("3_mf2ua")

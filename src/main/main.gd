@@ -6,20 +6,22 @@ extends Node2D
 var current_room : Node2D
 var current_camera_limits : Rect2
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Events.scene_change_requested.connect(load_room)
 	load_room("res://src/scenes/scene_1/scene_1.tscn", "new_game_spawn")
-	
+
+
 func load_room(path : String, spawn : String):
 	# Change out the old room for the new room
 	var new_room = load(path).instantiate()
 	self.add_child(new_room)
-	
 	if current_room:
 		current_room.queue_free()
 	current_room = new_room
 	
+	# Set player spawn based on room specified spawn
 	var player_spawn = new_room.get_node("Spawns/" + spawn)
 	player.global_position = player_spawn.global_position
 	
