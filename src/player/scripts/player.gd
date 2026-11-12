@@ -9,7 +9,7 @@ const DECELERATION : float = 2000.0
 const JUMP_VELOCITY : float = -850.0
 const DASH_SPEED : float = 1400.0
 const DASH_DURATION : float = 0.3
-const DASH_COOLDOWN : float = 0.5
+const DASH_COOLDOWN : float = 0.8
 const GRAVITY_MULT : float = 2.5
 const FALLING_GRAVITY_MULT : float = 3.2
 const TERMINAL_VELOCITY : float = 1300
@@ -25,10 +25,6 @@ var is_double_jump_available : bool = true
 
 var dash_timer: float = 0
 var dash_cooldown_timer: float = 0
-
-
-func _physics_process(delta : float) -> void:
-	check_dash_cooldown(delta)
 
 
 # Helpers

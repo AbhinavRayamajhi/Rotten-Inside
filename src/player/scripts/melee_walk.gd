@@ -5,7 +5,9 @@ func _enter() -> void:
 	entity.is_double_jump_available = true
 
 
-func _update() -> void:
+func _physics_update(delta: float) -> void:
+	entity.apply_gravity(delta, Enums.Gravity.REGULAR)
+	entity.handle_horizontal_movement(delta)
 	# Jump
 	if Input.is_action_just_pressed("jump"):
 		change_state.emit(&"jump")
@@ -15,14 +17,9 @@ func _update() -> void:
 		change_state.emit(&"dash")
 		return
 	# Fall
-	if entity.velocity.y > 0:
+	if not entity.is_on_floor():
 		change_state.emit(&"fall")
 		return
 	# Idle
-	if entity.velocity.y == 0:
+	if entity.velocity.x == 0:
 		change_state.emit(&"idle")
-
-
-func _physics_update(delta: float) -> void:
-	entity.apply_gravity(delta, Enums.Gravity.REGULAR)
-	entity.handle_horizontal_movement(delta)

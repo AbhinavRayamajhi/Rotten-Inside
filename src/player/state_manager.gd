@@ -13,6 +13,7 @@ var current_state : State
 @onready var melee_fall: State = $MeleeFall
 @onready var melee_dash: State = $MeleeDash
 
+var counter = 0
 
 func _ready() -> void:
 	if entity.current_mode == Enums.Mode.MELEE:
@@ -31,10 +32,15 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	current_state._update()
+	counter = (counter + 1) % 100
+	if counter == 1:
+		print(current_state)
 
 
 func _physics_process(delta: float) -> void:
+	entity.check_dash_cooldown(delta)
 	current_state._physics_update(delta)
+	entity.move_and_slide()
 
 
 func on_state_change(state : StringName) -> void:
