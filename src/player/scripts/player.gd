@@ -1,18 +1,24 @@
 extends CharacterBody2D
 
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 const SPEED : float = 450.0
 const DECELERATION : float = 3000.0
+
 const JUMP_VELOCITY : float = -850.0
+
 const DASH_SPEED : float = 1400.0
 const DASH_DURATION : float = 0.3
 const DASH_COOLDOWN : float = 0.8
+
 const GRAVITY_MULT : float = 2.5
 const FALLING_GRAVITY_MULT : float = 3.2
 const TERMINAL_VELOCITY : float = 1300
+
+const BODY_OFFSET_X : float = 70.0
 
 
 var current_mode : Enums.Mode = Enums.Mode.MELEE
@@ -53,6 +59,8 @@ func handle_horizontal_movement(delta : float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, DECELERATION * delta)
 	if facing_direction < 0:
-		animated_sprite_2d.flip_h = true
+		sprite_2d.flip_h = true
+		sprite_2d.offset.x = -BODY_OFFSET_X # Sprite has a gap on the right so needs fixed
 	else:
-		animated_sprite_2d.flip_h = false
+		sprite_2d.flip_h = false
+		sprite_2d.offset.x = 0.0

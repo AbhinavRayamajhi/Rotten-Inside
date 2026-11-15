@@ -3,7 +3,8 @@ extends State
 
 func _enter() -> void:
 	entity.is_double_jump_available = true
-
+	entity.animation_player.play("idle")
+	
 
 func _physics_update(delta: float) -> void:
 	entity.apply_gravity(delta, Enums.Gravity.REGULAR)

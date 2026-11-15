@@ -3,6 +3,7 @@ extends State
 
 func _enter() -> void:
 	entity.velocity.y = entity.JUMP_VELOCITY
+	entity.animation_player.play("jump")
 
 
 func _physics_update(delta: float) -> void:

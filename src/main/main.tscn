@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d2c0r487oyvo6" path="res://src/player/player.tscn" id="2_ab7mr"]
 [ext_resource type="Script" uid="uid://ck6dmp8dsr0h4" path="res://src/main/camera_2d.gd" id="3_ab7mr"]
 
-[node name="Main" type="Node2D" unique_id=28251738]
+[node name="Main" type="Node2D" unique_id=1703764459]
 script = ExtResource("1_3s6yk")
 
 [node name="Player" parent="." unique_id=13239550 instance=ExtResource("2_ab7mr")]

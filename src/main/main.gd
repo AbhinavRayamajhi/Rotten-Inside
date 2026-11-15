@@ -37,4 +37,3 @@ func load_room(path : String, spawn : String):
 	current_camera_limits = collision_shape.global_transform * collision_shape.shape.get_rect()
 	camera.set_limits(current_camera_limits)
 	camera.set_target(player)
-	

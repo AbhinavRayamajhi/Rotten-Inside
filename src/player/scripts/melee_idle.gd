@@ -6,6 +6,10 @@ func _enter() -> void:
 	entity.velocity.x = 0
 
 
+func _update() -> void:
+	entity.animation_player.play("idle")
+
+
 func _physics_update(delta: float) -> void:
 	entity.apply_gravity(delta, Enums.Gravity.REGULAR)
 	# Jump
