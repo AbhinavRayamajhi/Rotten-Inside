@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2c0r487oyvo6"]
 
 [ext_resource type="Script" uid="uid://d0ho82linr41d" path="res://src/player/scripts/player.gd" id="1_rxibo"]
-[ext_resource type="Texture2D" uid="uid://b2lshma3ki4dr" path="res://src/player/player_sprites.png" id="2_l271a"]
+[ext_resource type="Texture2D" uid="uid://c862if86ngcfo" path="res://src/player/player_sprites.png" id="2_l271a"]
 [ext_resource type="Script" uid="uid://ckj3r2gwm0laf" path="res://src/player/scripts/player_state_manager.gd" id="3_l271a"]
 [ext_resource type="Script" uid="uid://bq1b0cas0fnig" path="res://src/player/scripts/melee_idle.gd" id="3_mf2ua"]
 [ext_resource type="Script" uid="uid://m0xerrg30d8w" path="res://src/player/scripts/melee_walk.gd" id="4_5f2sf"]
@@ -25,10 +25,26 @@ tracks/0/keys = {
 "values": [Rect2(132, 0, 132, 132)]
 }
 
+[sub_resource type="Animation" id="Animation_cwolq"]
+resource_name = "fall"
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 264, 132, 132)]
+}
+
 [sub_resource type="Animation" id="Animation_ylhto"]
 resource_name = "idle"
 loop_mode = 1
-step = 0.125
+step = 0.11111111
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -36,7 +52,7 @@ tracks/0/path = NodePath("Sprite2D:region_rect")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1),
+"times": PackedFloat32Array(0, 0.11111111, 0.22222222, 0.33333334, 0.44444445, 0.5555556, 0.6666667, 0.7777778, 0.8888889),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 0, 132, 132), Rect2(132, 0, 132, 132), Rect2(264, 0, 132, 132), Rect2(396, 0, 132, 132), Rect2(528, 0, 132, 132), Rect2(528, 0, 132, 132), Rect2(660, 0, 132, 132), Rect2(792, 0, 132, 132), Rect2(924, 0, 132, 132)]
@@ -58,26 +74,45 @@ tracks/0/keys = {
 "values": [Rect2(0, 132, 132, 132)]
 }
 
+[sub_resource type="Animation" id="Animation_2smqc"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 396, 132, 132), Rect2(132, 396, 132, 132), Rect2(264, 396, 132, 132), Rect2(396, 396, 132, 132)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cwolq"]
 _data = {
 &"RESET": SubResource("Animation_8ydov"),
+&"fall": SubResource("Animation_cwolq"),
 &"idle": SubResource("Animation_ylhto"),
-&"jump": SubResource("Animation_l271a")
+&"jump": SubResource("Animation_l271a"),
+&"walk": SubResource("Animation_2smqc")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ab7mr"]
-size = Vector2(54, 127)
+size = Vector2(48, 127)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1l4rv"]
-radius = 17.0
-height = 124.0
+height = 100.0
 
 [node name="Player" type="CharacterBody2D" unique_id=13239550]
 collision_layer = 2
 script = ExtResource("1_rxibo")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1258909920]
-position = Vector2(36, -4)
+position = Vector2(34, -4)
 texture = ExtResource("2_l271a")
 region_enabled = true
 region_rect = Rect2(132, 0, 132, 132)
@@ -86,7 +121,7 @@ region_rect = Rect2(132, 0, 132, 132)
 libraries/ = SubResource("AnimationLibrary_cwolq")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=1696313281]
-position = Vector2(0, -3.5)
+position = Vector2(-3, -3.5)
 shape = SubResource("RectangleShape2D_ab7mr")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1501865607]

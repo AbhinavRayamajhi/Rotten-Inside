@@ -1,6 +1,10 @@
 extends State
 
 
+func _enter() -> void:
+	entity.animation_player.play("fall")
+
+
 func _physics_update(delta: float) -> void:
 	entity.apply_gravity(delta, Enums.Gravity.REGULAR)
 	entity.handle_horizontal_movement(delta)

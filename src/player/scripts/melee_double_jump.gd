@@ -4,6 +4,7 @@ extends State
 func _enter() -> void:
 	entity.is_double_jump_available = false
 	entity.velocity.y = entity.JUMP_VELOCITY
+	entity.animation_player.play("jump")
 
 
 func _physics_update(delta: float) -> void:
@@ -14,5 +15,5 @@ func _physics_update(delta: float) -> void:
 		change_state.emit(&"dash")
 		return
 	# Fall
-	if not entity.is_on_floor():
+	if not entity.is_on_floor() and entity.velocity.y >= 10:
 		change_state.emit(&"fall")

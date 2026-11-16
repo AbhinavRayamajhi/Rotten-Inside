@@ -18,5 +18,5 @@ func _physics_update(delta: float) -> void:
 		change_state.emit(&"dash")
 		return
 	# Fall
-	if not entity.is_on_floor():
+	if not entity.is_on_floor() and entity.velocity.y >= 10:
 		change_state.emit(&"fall")
