@@ -5,12 +5,12 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
-const SPEED : float = 600.0
+const SPEED : float = 450.0
 const DECELERATION : float = 3000.0
 
-const JUMP_VELOCITY : float = -950.0
+const JUMP_VELOCITY : float = -800.0
 
-const DASH_SPEED : float = 1300.0
+const DASH_SPEED : float = 1000.0
 const DASH_DURATION : float = 0.3
 const DASH_COOLDOWN : float = 0.8
 
