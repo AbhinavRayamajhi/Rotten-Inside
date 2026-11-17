@@ -7,6 +7,7 @@ extends StateManager
 @onready var melee_double_jump: State = $MeleeDoubleJump
 @onready var melee_fall: State = $MeleeFall
 @onready var melee_dash: State = $MeleeDash
+@onready var melee_wall_slide: State = $MeleeWallSlide
 
 
 func _ready() -> void:
@@ -18,10 +19,11 @@ func _ready() -> void:
 		states[&"double_jump"] = melee_double_jump
 		states[&"fall"] = melee_fall
 		states[&"dash"] = melee_dash
+		states[&"wall_slide"] = melee_wall_slide
 	# Connect their state change signals
 	for state in states:
 		states[state].change_state.connect(on_state_change)
-	super._ready()
+	current_state._enter()
 
 
 func _physics_process(delta: float) -> void:

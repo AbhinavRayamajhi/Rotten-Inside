@@ -6,6 +6,7 @@ extends CharacterBody2D
 
 
 const SPEED : float = 450.0
+const ACCELERATION : float = 3000.0
 const DECELERATION : float = 3000.0
 
 const JUMP_VELOCITY : float = -800.0
@@ -16,7 +17,9 @@ const DASH_COOLDOWN : float = 0.8
 
 const GRAVITY_MULT : float = 2.5
 const FALLING_GRAVITY_MULT : float = 3.2
-const TERMINAL_VELOCITY : float = 1300
+const TERMINAL_VELOCITY : float = 1300.0
+
+const WALL_KICK_SPEED : float = 450.0
 
 const BODY_OFFSET_X : float = 70.0
 
@@ -41,10 +44,10 @@ func check_dash_cooldown(delta : float) -> void:
 			is_dash_available = true
 
 
-func apply_gravity(delta : float, is_regular : Enums.Gravity) -> void:
+func apply_gravity(delta : float, gravity_type : Enums.Gravity) -> void:
 	# Increase gravity multiplier if player falling and less gravity if not regular(wall slide,etc)
 	current_gravity_mult = FALLING_GRAVITY_MULT if velocity.y > 0 else GRAVITY_MULT
-	if is_regular == Enums.Gravity.ON_WALL: 
+	if gravity_type  == Enums.Gravity.ON_WALL: 
 		current_gravity_mult /= 2
 	# Add the gravity and limit it to terminal velocity
 	velocity.y += get_gravity().y * current_gravity_mult * delta
@@ -55,7 +58,10 @@ func handle_horizontal_movement(delta : float) -> void:
 	var input_direction := Input.get_axis("left", "right")
 	if input_direction:
 		facing_direction = sign(input_direction)
-		velocity.x = input_direction * SPEED 
+		if is_on_floor():
+			velocity.x = input_direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, input_direction * SPEED, ACCELERATION * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, DECELERATION * delta)
 	if facing_direction < 0:

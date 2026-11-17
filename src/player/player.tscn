@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://1xb4hy2vd2m5" path="res://src/player/scripts/melee_double_jump.gd" id="6_jiejy"]
 [ext_resource type="Script" uid="uid://bx3lke8mmoc48" path="res://src/player/scripts/melee_fall.gd" id="7_x42xx"]
 [ext_resource type="Script" uid="uid://dovnihx4ce3f7" path="res://src/player/scripts/melee_dash.gd" id="8_l271a"]
+[ext_resource type="Script" uid="uid://b4n5c4y5rmi27" path="res://src/player/scripts/melee_wall_slide.gd" id="10_8ydov"]
 
 [sub_resource type="Animation" id="Animation_8ydov"]
 length = 0.001
@@ -158,4 +159,8 @@ entity = NodePath("../..")
 
 [node name="MeleeDash" type="Node2D" parent="StateManager" unique_id=554597665 node_paths=PackedStringArray("entity")]
 script = ExtResource("8_l271a")
+entity = NodePath("../..")
+
+[node name="MeleeWallSlide" type="Node2D" parent="StateManager" unique_id=839757781 node_paths=PackedStringArray("entity")]
+script = ExtResource("10_8ydov")
 entity = NodePath("../..")

@@ -16,6 +16,10 @@ func _physics_update(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and entity.is_dash_available:
 		change_state.emit(&"dash")
 		return
+	# Wall Slide
+	if entity.is_on_wall():
+		change_state.emit(&"wall_slide")
+		return
 	# Stop falling
 	if entity.is_on_floor():
 		# Walk
