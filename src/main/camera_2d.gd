@@ -2,11 +2,7 @@ extends Camera2D
 
 
 var target : Node2D
-
-
-var camera_target : Vector2
 var camera_speed : float = 5.0
-var facing_direction : float = 1.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta : float) -> void:
@@ -29,9 +25,10 @@ func set_limits(limits : Rect2) -> void:
 
 
 func smoothing(delta : float) -> void:
-	global_position = global_position.lerp(target.global_position, camera_speed * delta).round()
+	global_position = global_position.lerp(target.global_position, 1.0 - exp(-camera_speed * delta))
 
 
 func teleport() -> void:
 	if target:
 		global_position = target.global_position
+		reset_smoothing()

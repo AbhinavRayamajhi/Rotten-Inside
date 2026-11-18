@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bp4d1a038f0uo" path="res://src/transistions/transition.gd" id="1_jc1mo"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_yrenr"]
-b = Vector2(0, -192)
 
 [node name="Area2D" type="Area2D" unique_id=142645661]
 collision_mask = 2

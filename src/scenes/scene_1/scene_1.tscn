@@ -20,7 +20,7 @@ tile_set = ExtResource("2_i0n62")
 position = Vector2(56, -677)
 
 [node name="from_scene_2" type="Marker2D" parent="Spawns" unique_id=1185818015]
-position = Vector2(3041, -385)
+position = Vector2(3035, -448)
 
 [node name="Transitions" type="Node2D" parent="." unique_id=1848093451]
 
@@ -28,6 +28,7 @@ position = Vector2(3041, -385)
 position = Vector2(3069, -384)
 to_scene_path = "res://src/scenes/scene_2/scene_2.tscn"
 to_scene_spawn = "from_scene_1"
+end_point = Vector2(0, -192)
 
 [node name="CameraLimits" type="Area2D" parent="." unique_id=422083941]
 visible = false
