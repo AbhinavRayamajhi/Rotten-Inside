@@ -5,6 +5,7 @@ func _enter() -> void:
 	entity.dash_timer = entity.DASH_DURATION
 	entity.dash_cooldown_timer = entity.DASH_COOLDOWN
 	entity.is_dash_available = false
+	entity.animation_player.play("dash")
 
 
 func _physics_update(delta: float) -> void:

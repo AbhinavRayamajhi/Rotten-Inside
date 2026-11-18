@@ -11,13 +11,10 @@ const DECELERATION : float = 3000.0
 
 const JUMP_VELOCITY : float = -800.0
 
-const DASH_SPEED : float = 1000.0
-const DASH_DURATION : float = 0.3
+const DASH_SPEED : float = 1300.0
+const DASH_DURATION : float = 0.2
 const DASH_COOLDOWN : float = 0.8
 
-const GRAVITY_MULT : float = 2.5
-const FALLING_GRAVITY_MULT : float = 3.2
-const TERMINAL_VELOCITY : float = 1300.0
 
 const WALL_KICK_SPEED : float = 450.0
 
@@ -46,12 +43,12 @@ func check_dash_cooldown(delta : float) -> void:
 
 func apply_gravity(delta : float, gravity_type : Enums.Gravity) -> void:
 	# Increase gravity multiplier if player falling and less gravity if not regular(wall slide,etc)
-	current_gravity_mult = FALLING_GRAVITY_MULT if velocity.y > 0 else GRAVITY_MULT
+	current_gravity_mult = Constants.FALLING_GRAVITY_MULT if velocity.y > 0 else Constants.RISING_GRAVITY_MULT
 	if gravity_type  == Enums.Gravity.ON_WALL: 
 		current_gravity_mult /= 2
 	# Add the gravity and limit it to terminal velocity
 	velocity.y += get_gravity().y * current_gravity_mult * delta
-	velocity.y = min(velocity.y, TERMINAL_VELOCITY)
+	velocity.y = min(velocity.y, Constants.TERMINAL_VELOCITY)
 
 
 func handle_horizontal_movement(delta : float) -> void:

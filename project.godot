@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Events="*uid://br730a2eggo41"
 Enums="*uid://dt42gpiy52l5u"
+Constants="*uid://btjpx451x8fi0"
 
 [display]
 
