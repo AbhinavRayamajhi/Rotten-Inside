@@ -17,6 +17,7 @@ func load_room(path : String, spawn : String):
 	# Change out the old room for the new room
 	var new_room = load(path).instantiate()
 	self.add_child(new_room)
+	move_child(new_room, 0)
 	if current_room:
 		current_room.queue_free()
 	current_room = new_room

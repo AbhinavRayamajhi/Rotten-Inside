@@ -45,7 +45,7 @@ func apply_gravity(delta : float, gravity_type : Enums.Gravity) -> void:
 	# Increase gravity multiplier if player falling and less gravity if not regular(wall slide,etc)
 	current_gravity_mult = Constants.FALLING_GRAVITY_MULT if velocity.y > 0 else Constants.RISING_GRAVITY_MULT
 	if gravity_type  == Enums.Gravity.ON_WALL: 
-		current_gravity_mult /= 2
+		current_gravity_mult /= 2.5
 	# Add the gravity and limit it to terminal velocity
 	velocity.y += get_gravity().y * current_gravity_mult * delta
 	velocity.y = min(velocity.y, Constants.TERMINAL_VELOCITY)

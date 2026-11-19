@@ -4,6 +4,7 @@ var wall_normal : Vector2 = Vector2.ZERO
 
 func _enter() -> void:
 	wall_normal = entity.get_wall_normal()
+	entity.velocity.y /= 2.5
 
 
 func _physics_update(delta: float) -> void:	
